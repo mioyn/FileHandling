@@ -5,10 +5,10 @@ import java.nio.file.*;
 
 public class WithFileWatchService {
     public static void main(String[] args) throws IOException {
-
+        String user = System.getenv("USER");
         try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
 
-            Path dir = Path.of("C:\\Users\\midhu\\work\\sample_data");
+            Path dir = Path.of("C:\\Users\\" + user + "\\work\\sample_data");
 
             WatchKey watchKey = dir.register(watchService,
                     StandardWatchEventKinds.ENTRY_CREATE,

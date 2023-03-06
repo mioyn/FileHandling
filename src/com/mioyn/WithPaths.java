@@ -10,18 +10,19 @@ import java.util.stream.Stream;
 
 public class WithPaths {
     public static void main(String[] args) {
+        String user = System.getenv("USER");
         System.out.println("----------------------Absolute path------------------------------------");
-        Path path1 = Path.of("C:\\Users\\midhu\\work\\sample_data\\male_players.csv");
+        Path path1 = Path.of("C:\\Users\\" + user + "\\work\\sample_data\\male_teams.csv");
         System.out.println(path1);
         pathProperties(path1);
 
         System.out.println("----------------------Not an Absolute path------------------------------------");
-        Path path2 = Path.of("work","sample_data", "male_players.csv");
+        Path path2 = Path.of("work","sample_data", "male_teams.csv");
         System.out.println(path2);
         pathProperties(path2);
 
         Path outputPath = FileSystems.getDefault()
-                .getPath("C:\\Users\\midhu\\work\\sample_data\\tmp1");
+                .getPath("C:\\Users\\" + user + "\\work\\sample_data\\tmp1");
         try {
             System.out.println("----------------------createDirectory------------------------------------");
             Files.createDirectory(outputPath);
@@ -30,7 +31,7 @@ public class WithPaths {
             System.out.println("----------------------Files.copy------------------------------------");
             Path destPath = Path.of(outputPath.toAbsolutePath().toString(),
                     "sample.txt");
-            Path path = Path.of("C:\\Users\\midhu\\work\\sample_data",".male_coaches.csv");
+            Path path = Path.of("C:\\Users\\" + user + "\\work\\sample_data",".male_coaches.csv");
             Files.copy(path, destPath);
             double kilobytes = Files.size(destPath) / (double)1024;
             System.out.println("Size : "+ kilobytes);
@@ -45,7 +46,7 @@ public class WithPaths {
             System.out.println("Is Writable: " + (Files.isWritable(newFilePath) ? "yes" : "no"));
 
             System.out.println("----------------------Files.move------------------------------------");
-            Path copyFilePath = Path.of("C:\\Users\\midhu\\work\\sample_data","sample4.txt");
+            Path copyFilePath = Path.of("C:\\Users\\" + user + "\\work\\sample_data","sample4.txt");
             Files.move(destPath, copyFilePath);
             System.out.println("Exists? : " + (Files.exists(copyFilePath)? "yes": "no"));
             System.out.println("File moved to: " + copyFilePath.toAbsolutePath());

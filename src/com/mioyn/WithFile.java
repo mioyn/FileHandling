@@ -6,16 +6,17 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Main {
+public class WithFile {
 
     public static void main(String... args) {
+        String user = System.getenv("USER");
         System.out.println("-------------------From File---------------------------------------");
-        File file = new File("C:\\Users\\midhu\\work\\sample_data\\male_players.csv");
+        File file = new File("C:\\Users\\" + user + "\\work\\sample_data\\male_teams.csv");
         printFileStats(file);
 
         System.out.println("-------------------From URI---------------------------------------");
         try {
-            URI uri = new URI("file:///C:/Users/midhu/work/sample_data/male_teams.csv");
+            URI uri = new URI("file:///C:/Users/" + user + "/work/sample_data/male_teams.csv");
             File f = new File(uri);
             printFileStats(f);
         } catch (URISyntaxException use) {
@@ -24,15 +25,15 @@ public class Main {
 
         System.out.println("----------------------A directory----------------------------------");
         System.out.println("A directory");
-        File d = new File("C:\\Users\\midhu\\work\\sample_data");
+        File d = new File("C:\\Users\\" + user + "\\work\\sample_data");
         Arrays.stream(Objects.requireNonNull(d.listFiles())).forEach(ff ->
                 System.out.println("\t File Name : "+ ff.getName()));
 
         System.out.println("----------------------Rename------------------------------------");
         File of = new File(
-                "C:\\Users\\midhu\\work\\sample_data\\renamed.txt");
+                "C:\\Users\\" + user + "\\work\\sample_data\\renamed.txt");
         File renamed = new File(
-                "C:\\Users\\midhu\\work\\sample_data\\created.txt");
+                "C:\\Users\\" + user + "\\work\\sample_data\\created.txt");
         boolean result = of.renameTo(renamed);
         System.out.println("Renaming succeeded? : "+ result);
 
